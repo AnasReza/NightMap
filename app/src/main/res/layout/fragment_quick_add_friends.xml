@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView android:id="@+id/sync_contact_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:text="Sync Contacts"
+    android:textSize="13dp"
+    android:textColor="@android:color/white"
+    android:padding="10dp"
+    android:drawableLeft="@drawable/ic_sync"
+    android:drawablePadding="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myfriends_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sync_contact_text"></androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

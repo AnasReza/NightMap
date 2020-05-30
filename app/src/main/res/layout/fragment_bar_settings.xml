@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/background_filed_circle">
+
+            <ImageView android:id="@+id/profileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:text="Alexis James"
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
+
+            <TextView android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/background_add_photo"
+                android:padding="15dp"
+                android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
+                android:textColor="@android:color/white" />
+
+            <TextView android:id="@+id/edit_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableLeft="@drawable/ic_profile_grey"
+                android:drawableRight="@drawable/ic_path"
+                android:drawablePadding="20dp"
+                android:text="Edit Profile"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+
+            <TextView android:id="@+id/change_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableLeft="@drawable/ic_phone_call"
+                android:drawableRight="@drawable/ic_path"
+                android:drawablePadding="20dp"
+                android:text="Change Number"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+
+
+
+            <TextView android:id="@+id/privacy_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableLeft="@drawable/ic_privacy_policy"
+                android:drawablePadding="20dp"
+                android:text="Privacy Policy"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+
+            <TextView android:id="@+id/terms_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableLeft="@drawable/ic_terms_and_conditions"
+                android:drawablePadding="20dp"
+                android:text="Terms &amp; Condition"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableLeft="@drawable/ic_share"
+                android:drawablePadding="20dp"
+                android:text="Share Our App"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+
+            <TextView android:id="@+id/log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:drawableLeft="@drawable/ic_logout"
+                android:drawablePadding="20dp"
+                android:text="Log out"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

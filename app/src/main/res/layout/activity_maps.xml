@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:padding="20dp">
+        <ImageView
+            android:layout_width="15.49dp"
+            android:layout_height="12.13dp"
+            android:background="@drawable/ic_back_arrow"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sarah Molt Location"
+            android:textSize="17dp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_regular"
+           android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <fragment
+        android:id="@+id/map"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        tools:context=".ui.activity.MapsActivity" />
+</LinearLayout>

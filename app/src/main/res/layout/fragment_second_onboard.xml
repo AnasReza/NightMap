@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/numberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="02"
+           android:fontFamily="@font/rubik_regular"
+            android:textColor="@android:color/white"
+            android:textSize="95dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@android:color/white"></LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/headLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topLay"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/rubik_bold"
+        android:text="SEE &amp; LEAVE YOUR REVIEWS"
+        android:textColor="@android:color/white"
+        android:textSize="32dp"
+
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headLine"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16dp"
+        android:text="See the reviews left by other users before you pay your visit, and then leave yours."
+        android:textColor="#5D5D5D" />
+
+    <ImageView
+        android:id="@+id/centerImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/subLine"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ic_wine_glass" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_bottomdesign_middle" />
+</RelativeLayout>

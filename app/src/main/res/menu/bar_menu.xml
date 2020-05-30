@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_only_wine_glass"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_customer"
+        android:icon="@drawable/ic_profile_grey"
+        android:title="Customers" />
+
+    <item
+        android:id="@+id/navigation_events"
+        android:icon="@drawable/ic_calender_grey"
+        android:title="Events" />
+
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_bell_grey"
+        android:title="Notification" />
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings_grey"
+        android:title="Settings" />
+
+</menu>

@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+    </style> <style name="custom_seekbar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <!-- Customize your theme here. -->
+    <item name="android:progressDrawable">@drawable/background_seekbar_progress</item>
+    <item name="android:minHeight">5dip</item>
+    <item name="android:maxHeight">5dip</item>
+    </style>
+
+    <style name="MySwitchCompat" parent="">
+        <item name="colorControlActivated">#5C29FF</item>
+        <item name="colorSwitchThumbNormal">#aaa</item>
+
+    </style>
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "320005299712",
+    "firebase_url": "https://night-map-b1043.firebaseio.com",
+    "project_id": "night-map-b1043",
+    "storage_bucket": "night-map-b1043.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320005299712:android:34b9d3d53f29e4131e42e5",
+        "android_client_info": {
+          "package_name": "com.Elroye.NightMap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320005299712-n83odtlhc2j0k4qrblubi0pa3kitglms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Elroye.NightMap",
+            "certificate_hash": "ff973d3b0fd6d3a147540a9dcadf4459441dd06b"
+          }
+        },
+        {
+          "client_id": "320005299712-cav0pg4qdqkabse3vras5pt6il5mg7ob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9uUGNQ1VJM1FBbS5ZyqP9Nvw2iUfc41k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320005299712-cav0pg4qdqkabse3vras5pt6il5mg7ob.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "320005299712-6oj0b3gpiolnfh3vhrfurir58d3sm8d6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Elroye.NightMap"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
