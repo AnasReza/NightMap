@@ -10,11 +10,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nightmap.R
 import com.nightmap.ui.activity.ChangeNumberActivity
+import com.nightmap.ui.activity.RegisterAsActivity
 import com.nightmap.ui.activity.TextActivity
 import com.nightmap.ui.activity.bar_owner.BarAddEditProfileActivity
 import com.nightmap.ui.activity.user.UserLogin
@@ -29,6 +34,7 @@ class BarSettingsFragment : Fragment(), View.OnClickListener {
     private var profile_image: ImageView? = null
     private var profile_name: TextView? = null
     private var description: TextView? = null
+    private var shareApp:TextView?=null
     private var pref: Preferences? = null
     private var db: FirebaseFirestore? = null
     override fun onCreateView(
@@ -52,24 +58,26 @@ class BarSettingsFragment : Fragment(), View.OnClickListener {
         profile_image = view!!.findViewById(R.id.profileImage)
         profile_name = view!!.findViewById(R.id.profile_name)
         description = view!!.findViewById(R.id.description)
+        shareApp=view!!.findViewById(R.id.shareApp)
 
         policy!!.setOnClickListener(this)
         terms!!.setOnClickListener(this)
         change_number!!.setOnClickListener(this)
         edit_profile!!.setOnClickListener(this)
         log_out!!.setOnClickListener(this)
+        shareApp!!.setOnClickListener(this)
     }
 
     override fun onResume() {
         super.onResume()
         db!!.collection("Bars").document(pref!!.getBarID()!!).get()
             .addOnSuccessListener { documentSnapshot ->
-                val urls:ArrayList<String> = documentSnapshot.get("imagesURL") as ArrayList<String>
+                val urls: ArrayList<String> = documentSnapshot.get("imagesURL") as ArrayList<String>
                 Glide.with(activity!!).asBitmap().load(urls[0])
                     .apply(RequestOptions.circleCropTransform())
                     .into(profile_image!!)
-                profile_name!!.text= documentSnapshot.get("fullName").toString()
-                description!!.text= documentSnapshot.get("description").toString()
+                profile_name!!.text = documentSnapshot.get("title").toString()
+                description!!.text = documentSnapshot.get("description").toString()
             }
     }
 
@@ -82,6 +90,21 @@ class BarSettingsFragment : Fragment(), View.OnClickListener {
                         TextActivity::class.java
                     ).putExtra("headline", "PRIVACY POLICY")
                 )
+            }
+            R.id.shareApp->{
+                try {
+                    var shareIntent = Intent(Intent.ACTION_SEND)
+                    shareIntent.setType("text/plain")
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Night Map")
+                    var message = "\nLet me recommend you this application\n\n"
+                    message =
+                        "$message https://play.google.com/store/apps/details?id=com.Elroye.NightMap"
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, message)
+                    activity!!.startActivity(Intent.createChooser(shareIntent, "Choose Any"))
+
+                } catch (e: Exception) {
+                    //e.toString();
+                }
             }
             R.id.terms_condition -> {
                 activity!!.startActivity(
@@ -98,12 +121,24 @@ class BarSettingsFragment : Fragment(), View.OnClickListener {
                 activity!!.startActivity(Intent(activity!!, BarAddEditProfileActivity::class.java))
             }
             R.id.log_out -> {
-                pref!!.setUserID("")
-                pref!!.setLogin(false)
-                pref!!.setUserType("")
-                activity!!.finishAffinity()
-                activity!!.startActivity(Intent(activity, UserLogin::class.java))
-                activity!!.finish()
+                var auth=FirebaseAuth.getInstance()
+                val user: FirebaseUser? = auth.currentUser
+                var credential: AuthCredential = EmailAuthProvider.getCredential(
+                    user!!.email!!,
+                    pref!!.getBarPassword()!!
+                )
+                user.reauthenticate(credential).addOnSuccessListener {
+                    auth.signOut()
+                        pref!!.setUserID("")
+                        pref!!.setLogin(false)
+                        pref!!.setUserType("")
+                        pref!!.setBarID("")
+                        pref!!.setBarPassword("")
+
+                        activity!!.startActivity(Intent(activity, RegisterAsActivity::class.java))
+                        activity!!.finishAffinity()
+
+                }
             }
         }
     }

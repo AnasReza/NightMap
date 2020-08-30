@@ -26,7 +26,7 @@
         android:background="@drawable/background_circle_image_with_stroke"
         android:translationZ="90dp">
 
-        <ImageView
+        <ImageView android:id="@+id/imageLayout"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:layout_centerInParent="true"
@@ -48,7 +48,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
-            <TextView
+            <TextView android:id="@+id/barName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -85,7 +85,11 @@
             android:layout_below="@+id/textLayout"
             android:background="@android:color/black"
             android:orientation="horizontal"
-            android:padding="10dp"
+
+            android:paddingRight="7dp"
+            android:paddingLeft="7dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:weightSum="4">
 
             <LinearLayout
@@ -109,6 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
+                        android:layout_centerInParent="true"
                         android:text="4.5"
                         android:textColor="@android:color/white"
                         android:textSize="20dp"></TextView>
@@ -162,14 +167,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="2dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:textColor="@android:color/white"
-                android:textSize="10dp" />
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -202,14 +199,6 @@
                     android:textColor="@android:color/white"
                     android:textSize="10dp" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="2dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:textColor="@android:color/white"
-                android:textSize="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -248,25 +237,38 @@
 
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/description"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_view"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@+id/ratingLayout"
+            android:fillViewport="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:padding="10dp"
-            android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
-            android:textColor="@android:color/white" />
+            android:scrollbars="none"
+            android:layout_below="@+id/ratingLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
 
         <Button
             android:id="@+id/leave_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/description"
+            android:layout_below="@+id/nested_view"
             android:layout_margin="20dp"
             android:background="@drawable/button_background"
             android:drawableRight="@drawable/ic_right_arrow"

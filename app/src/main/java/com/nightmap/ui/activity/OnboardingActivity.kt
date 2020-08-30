@@ -43,6 +43,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun init() {
+
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val height = displayMetrics.heightPixels
@@ -72,6 +73,7 @@ class OnboardingActivity : AppCompatActivity() {
             } else if (index > 3) {
 
                 startActivity(Intent(this@OnboardingActivity, RegisterAsActivity::class.java))
+                finish()
             }
         }
         skipText!!.setOnClickListener {
@@ -81,6 +83,7 @@ class OnboardingActivity : AppCompatActivity() {
                     RegisterAsActivity::class.java
                 )
             )
+            finish()
         }
     }
 

@@ -6,9 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:layout_marginBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    app:cardCornerRadius="10dp">
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:cardCornerRadius="10dp"
+    android:background="@android:color/transparent">
 
     <RelativeLayout
         android:id="@+id/layout"
@@ -27,13 +28,24 @@
             android:textColor="@android:color/white"
             android:textSize="14dp" />
 
-        <LinearLayout
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.FadingCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:translationZ="90dp"
+            app:SpinKit_Color="@android:color/white"
+            android:visibility="gone"/>
+        <LinearLayout android:id="@+id/bottomLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#80000000"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"

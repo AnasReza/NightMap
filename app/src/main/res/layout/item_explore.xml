@@ -11,7 +11,16 @@
     <RelativeLayout android:id="@+id/mainLayout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
-
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.FadingCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:translationZ="90dp"
+            app:SpinKit_Color="@android:color/white"
+            android:visibility="gone"/>
         <TextView
             android:id="@+id/headline"
             android:layout_width="match_parent"

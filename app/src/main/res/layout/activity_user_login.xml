@@ -23,12 +23,13 @@
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
-        <EditText
+        <EditText android:id="@+id/phone_number_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_background"
             android:drawableLeft="@drawable/ic_phone_call"
             android:hint="Phone Number"
+            android:inputType="phone"
             android:textColorHint="@android:color/white"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
@@ -36,7 +37,7 @@
             android:drawablePadding="15dp" />
 
         <Button
-            android:id="@+id/user_register"
+            android:id="@+id/sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="SIGN IN"

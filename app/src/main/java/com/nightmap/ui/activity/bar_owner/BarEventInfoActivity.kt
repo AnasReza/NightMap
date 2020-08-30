@@ -1,11 +1,11 @@
 package com.nightmap.ui.activity.bar_owner
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
-import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
@@ -14,19 +14,20 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.ViewPager2
+import com.github.ybq.android.spinkit.SpinKitView
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nightmap.R
+import com.nightmap.adapter.ImageSliderAdapter
 import kotlinx.android.synthetic.main.activity_bar_event_info.*
 import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
-import kotlin.collections.ArrayList
 
 class BarEventInfoActivity : AppCompatActivity(), View.OnClickListener {
     private var edit_event: Button? = null
@@ -38,10 +39,13 @@ class BarEventInfoActivity : AppCompatActivity(), View.OnClickListener {
     private var dateText: TextView? = null
     private var timeText: TextView? = null
     private var imageLayout: RelativeLayout? = null
+    private var viewPager: ViewPager2? = null
+    private var spinKitView:SpinKitView?=null
 
     private var eventId: String = ""
     private var db: FirebaseFirestore? = null
     private var task: SomeTask? = null
+    private var pagerAdapter: ImageSliderAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,14 +65,16 @@ class BarEventInfoActivity : AppCompatActivity(), View.OnClickListener {
         dateText = findViewById(R.id.dateText)
         timeText = findViewById(R.id.timeText)
         imageLayout = findViewById(R.id.imageLayout)
+        viewPager = findViewById(R.id.pager)
+        spinKitView=findViewById(R.id.spin_kit)
 
         edit_event!!.setOnClickListener(this)
         back_button!!.setOnClickListener(this)
 
         db!!.collection("Events").document(eventId).get().addOnSuccessListener { document ->
             val goingList: ArrayList<String> = document.get("usersGoing") as ArrayList<String>
-            val url: ArrayList<String> = document.get("imageUrl") as ArrayList<String>
-            val timestamp: Timestamp = document.get("time") as Timestamp
+            val url: ArrayList<String> = document.get("imagesUrl") as ArrayList<String>
+            val timestamp: Timestamp = document.get("eventTime") as Timestamp
             val date: Date = timestamp.toDate()
             val day: String = DateFormat.format("dd", date) as String
             val month: String = DateFormat.format("MM", date) as String
@@ -84,7 +90,9 @@ class BarEventInfoActivity : AppCompatActivity(), View.OnClickListener {
             timeText!!.text = "$hour $am_pm"
 
             task = SomeTask(url[0])
-            task!!.execute()
+            pagerAdapter = ImageSliderAdapter(this, url, eventId, "EventImages",spinKitView!!)
+            pager!!.adapter = pagerAdapter
+            //task!!.execute()
         }
 
     }
@@ -107,7 +115,12 @@ class BarEventInfoActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.edit_event -> {
-                finish()
+                startActivity(
+                    Intent(this, BarEventEditActivity::class.java).putExtra(
+                        "eventID",
+                        eventId
+                    )
+                )
             }
             R.id.back_button -> {
                 onBackPressed()

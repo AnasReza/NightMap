@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.nightmap.ui.fragment.admin.AdminAllCustomerFragment
 import com.nightmap.ui.fragment.admin.AdminPendingCustomerFragment
+import com.nightmap.ui.fragment.admin.AdminRejectedCustomerFragment
 import com.nightmap.ui.fragment.user.FriendsRequestFragment
 import com.nightmap.ui.fragment.user.MyFriendsListFragment
 import com.nightmap.ui.fragment.user.QuickAddFriendListFragment
@@ -13,12 +14,11 @@ class AdminTabAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> {
-               AdminAllCustomerFragment()
-            }
+            0 -> AdminAllCustomerFragment()
+
             1 -> AdminPendingCustomerFragment()
             else -> {
-                return FriendsRequestFragment()
+                return AdminRejectedCustomerFragment()
             }
         }
     }

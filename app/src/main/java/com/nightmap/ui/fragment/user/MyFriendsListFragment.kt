@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.ybq.android.spinkit.SpinKitView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -19,6 +20,7 @@ import com.nightmap.utility.Preferences
 class MyFriendsListFragment : Fragment() {
     private var friendsList: RecyclerView? = null
     private var messageText:TextView?=null
+    private var spin_kit:SpinKitView?=null
     private var mLayoutManager: LinearLayoutManager? = null
     private var adapter: FriendsListAdapter? = null
     private var db: FirebaseFirestore? = null
@@ -39,6 +41,7 @@ class MyFriendsListFragment : Fragment() {
 
         friendsList = view!!.findViewById(R.id.myfriends_list)
         messageText=view!!.findViewById(R.id.messageText)
+        spin_kit=view!!.findViewById(R.id.spin_kit)
         mLayoutManager = LinearLayoutManager(activity!!.applicationContext)
 
 
@@ -49,11 +52,12 @@ class MyFriendsListFragment : Fragment() {
                     list.add(doc)
                 }
 
-                if(list.size!=0){
-                    adapter=FriendsListAdapter(activity!!,list)
+                if(list.size!=0 && activity!=null){
+                    adapter=FriendsListAdapter(activity!!,list,spin_kit!!)
                     friendsList!!.layoutManager = mLayoutManager
                             friendsList!!.adapter = adapter
                 }else{
+                    spin_kit!!.visibility=View.GONE
                     messageText!!.visibility=View.VISIBLE
                 }
             }

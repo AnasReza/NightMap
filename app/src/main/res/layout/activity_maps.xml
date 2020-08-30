@@ -5,20 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
         android:padding="20dp">
-        <ImageView
+        <ImageView android:id="@+id/back_button"
             android:layout_width="15.49dp"
             android:layout_height="12.13dp"
             android:background="@drawable/ic_back_arrow"
             android:layout_centerVertical="true"/>
-        <TextView
+        <TextView android:id="@+id/headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sarah Molt Location"
+            android:text="Select Location"
             android:textSize="17dp"
             android:textColor="@android:color/white"
             android:fontFamily="@font/roboto_regular"

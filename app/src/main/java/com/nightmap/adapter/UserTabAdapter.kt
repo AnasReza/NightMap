@@ -14,9 +14,9 @@ class UserTabAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm) {
             0 -> {
                MyFriendsListFragment()
             }
-            1 -> QuickAddFriendListFragment()
+            1 -> FriendsRequestFragment()
             else -> {
-                return FriendsRequestFragment()
+                return QuickAddFriendListFragment()
             }
         }
     }
@@ -28,9 +28,9 @@ class UserTabAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
             0 -> "My Friends"
-            1 -> "Quick Add"
+            1 -> "Friend Request"
             else -> {
-                return "Friend Request"
+                return "Quick Add"
             }
         }
     }

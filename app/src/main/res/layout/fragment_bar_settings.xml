@@ -37,7 +37,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif"
-                android:text="Alexis James"
                 android:textColor="@android:color/white"
                 android:textSize="20dp" />
 
@@ -47,7 +46,6 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/background_add_photo"
                 android:padding="15dp"
-                android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
                 android:textColor="@android:color/white" />
 
             <TextView android:id="@+id/edit_profile"
@@ -102,7 +100,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16dp" />
 
-            <TextView
+            <TextView android:id="@+id/shareApp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -122,8 +120,8 @@
                 android:layout_marginRight="30dp"
                 android:drawableLeft="@drawable/ic_logout"
                 android:drawablePadding="20dp"
-                android:text="Log out"
-                android:textColor="@android:color/white"
+                android:text="Log Out"
+                android:textColor="#FF0000"
                 android:textSize="16dp" />
         </LinearLayout>
 

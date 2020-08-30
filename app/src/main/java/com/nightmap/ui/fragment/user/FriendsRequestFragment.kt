@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.ybq.android.spinkit.SpinKitView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -19,6 +20,7 @@ import com.nightmap.utility.Preferences
 class FriendsRequestFragment : Fragment() {
     private var friendsList: RecyclerView? = null
     private var messageText: TextView? = null
+    private var spinKitView:SpinKitView?=null
     private var mLayoutManager: LinearLayoutManager? = null
     private var adapter: FriendsRequestAdapter? = null
     private var db: FirebaseFirestore? = null
@@ -40,19 +42,21 @@ class FriendsRequestFragment : Fragment() {
 
         friendsList = view!!.findViewById(R.id.myfriends_list)
         messageText = view!!.findViewById(R.id.messageText)
+        spinKitView=view!!.findViewById(R.id.spin_kit)
         mLayoutManager = LinearLayoutManager(activity!!.applicationContext)
         db!!.collection("User").document(pref!!.getUserID().toString()).collection("FriendRequests")
             .get().addOnSuccessListener { document ->
-            val list: ArrayList<QueryDocumentSnapshot> = ArrayList<QueryDocumentSnapshot>()
+            val list: ArrayList<QueryDocumentSnapshot> = ArrayList()
             for (doc in document) {
                 list.add(doc)
             }
                 if(list.size!=0){
-                    adapter = FriendsRequestAdapter(activity!!, list)
+                    adapter = FriendsRequestAdapter(activity!!, list,spinKitView!!)
 
                     friendsList!!.layoutManager = mLayoutManager
                     friendsList!!.adapter = adapter
                 }else{
+                    spinKitView!!.visibility=View.GONE
                     messageText!!.visibility=View.VISIBLE
                 }
 

@@ -5,10 +5,9 @@
     android:background="@drawable/background"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/topLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/club">
+        android:layout_height="200dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,7 +22,7 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/ic_back_arrow" />
 
-            <TextView
+            <TextView android:id="@+id/headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -41,7 +40,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginRight="30dp"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Just show this screen to anyone at the counter to use yur FREE drink."
+                android:text="Just show this screen to anyone at the counter to use your FREE drink."
                 android:textSize="16dp" />
 <LinearLayout
     android:layout_width="match_parent"
@@ -105,28 +105,20 @@
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
 
-            <RelativeLayout
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:background="@drawable/background_item3">
 
-                <ImageView
-                    android:layout_width="13.05dp"
-                    android:layout_height="9.23dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/ic_tick" />
-            </RelativeLayout>
-
-            <TextView
+            <CheckBox
+                android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Free Drink Used"
-                android:textColor="@android:color/white"
-                android:layout_gravity="center_vertical"
                 android:textSize="16dp"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/white"
                 android:fontFamily="@font/roboto_bold"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:textStyle="bold"/>
+
+
         </LinearLayout>
 
 
@@ -170,10 +162,11 @@
             android:layout_gravity="center_vertical|top"
             android:layout_marginBottom="25dp"
             android:layout_marginTop="5dp">
-            <TextView
+
+            <TextView android:id="@+id/timerText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="09:45 Mins "
+                android:text="09:45 Mins Remaining"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:textSize="12dp"
@@ -181,16 +174,6 @@
                 android:textStyle="bold"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remaining"
-                android:textColor="@android:color/white"
-                android:layout_gravity="center_vertical"
-                android:textSize="12dp"
-                android:fontFamily="@font/roboto_regular"
-                android:textStyle="bold"
-                />
         </LinearLayout>
 
         <LinearLayout
@@ -220,7 +203,7 @@
     </LinearLayout>
 </LinearLayout>
 
-            <Button android:id="@+id/change_number"
+            <Button android:id="@+id/confirm_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="CONFIRM"

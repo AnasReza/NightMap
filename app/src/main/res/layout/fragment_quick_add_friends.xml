@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView android:id="@+id/sync_contact_text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentRight="true"
-    android:text="Sync Contacts"
-    android:textSize="13dp"
-    android:textColor="@android:color/white"
-    android:padding="10dp"
-    android:drawableLeft="@drawable/ic_sync"
-    android:drawablePadding="10dp"/>
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myfriends_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/sync_contact_text"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@+id/sync_contact_text"
+        android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
 
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.FadingCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:translationZ="90dp"
+        app:SpinKit_Color="@android:color/white"
+        android:visibility="visible"/>
 </RelativeLayout>

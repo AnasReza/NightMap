@@ -9,10 +9,23 @@
     <RelativeLayout android:id="@+id/upperLayout"
         android:layout_width="match_parent"
         android:layout_height="237dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/club">
-
-        <ImageView
+        android:layout_alignParentTop="true">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.FadingCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:translationZ="90dp"
+            app:SpinKit_Color="@android:color/white"
+            android:visibility="visible"/>
+        <ImageView android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -67,18 +80,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:text="EVENT NAME"
                     android:fontFamily="@font/roboto_bold"
                     android:textColor="@android:color/white"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/ageCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
-                    app:cardCornerRadius="15dp">
+                    app:cardCornerRadius="15dp"
+                    android:visibility="gone">
 
                     <TextView android:id="@+id/agelimitText"
                         android:layout_width="wrap_content"
@@ -87,7 +101,6 @@
                         android:paddingTop="8dp"
                         android:paddingRight="20dp"
                         android:paddingBottom="8dp"
-                        android:text="18 to 25 age"
                         android:fontFamily="@font/roboto_regular"
                         android:textColor="@android:color/white"
                         android:textSize="10dp"
@@ -102,8 +115,7 @@
                     android:layout_below="@+id/event_name"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/ic_people"
-                    android:drawablePadding="10dp"
-                    android:text="142 People Are Going" />
+                    android:drawablePadding="10dp"/>
 
             </RelativeLayout>
 
@@ -112,15 +124,28 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
-
-            <TextView android:id="@+id/description"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:textSize="12dp"
-                android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
-                android:textColor="@android:color/white" />
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="12dp"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -152,9 +177,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_item2"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="3/20/20"
+                        android:gravity="start"
+                        android:paddingLeft="15dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
                         android:fontFamily="@font/roboto_regular"
                         android:textColor="@android:color/white"
                         android:textSize="16dp" />
@@ -182,9 +209,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_item2"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="5 PM"
+                        android:gravity="start"
+                        android:paddingLeft="15dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
                         android:fontFamily="@font/roboto_regular"
                         android:textColor="@android:color/white"
                         android:textSize="16dp" />

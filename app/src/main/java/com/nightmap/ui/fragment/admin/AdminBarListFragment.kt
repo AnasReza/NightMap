@@ -17,6 +17,7 @@ class AdminBarListFragment : Fragment() {
     private var tabs_main:TabLayout?=null
     private var viewPager_main: ViewPager?=null
     private var fragmentAdapter: AdminTabAdapter?=null
+    private var check:Boolean=true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,14 +29,13 @@ class AdminBarListFragment : Fragment() {
     }
 
     private fun init(view: View?) {
+
         fragmentAdapter=AdminTabAdapter(childFragmentManager)
         viewPager_main=view!!.findViewById(R.id.viewpager_main)
         tabs_main=view!!.findViewById(R.id.tabs_main)
 
         viewPager_main!!.adapter=fragmentAdapter
         tabs_main!!.setupWithViewPager(viewPager_main)
-
-
 
     }
 }

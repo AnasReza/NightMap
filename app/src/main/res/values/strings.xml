@@ -4,4 +4,6 @@
     <string name="register">By Registering With Us You Agree To Accept Our <b>Terms &amp; Conditions</b> And <b>Privacy Policy</b></string>
 
     <string name="congratulations_approval"><b>Congratulations!</b> your bar is approved now you can manage it now.</string>
+
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
 </resources>

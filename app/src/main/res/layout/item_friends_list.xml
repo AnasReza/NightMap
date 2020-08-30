@@ -32,7 +32,7 @@
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/imageFrame"
             android:fontFamily="@font/poppins_regular"
-            android:text="Adam Evans."
+
             android:textColor="@android:color/white"
             android:textSize="16dp"></TextView>
 
@@ -44,7 +44,6 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-            android:text="joined on 11/25/19"
             android:fontFamily="@font/lato_regular"
             android:textColor="#7C7C7C"
             android:textSize="10dp" />

@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +21,7 @@
                 android:layout_height="200dp"
                 android:background="@drawable/club">
 
-                <ImageView
+                <ImageView android:id="@+id/back_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -82,7 +83,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:text="4.5"
                                 android:textColor="@android:color/white"
                                 android:textSize="20dp"></TextView>
                         </RelativeLayout>
@@ -125,7 +125,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
-                                android:text="4.5"
                                 android:textColor="@android:color/white"
                                 android:textSize="20dp"></TextView>
                         </RelativeLayout>
@@ -238,7 +237,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Pearl Street"
                     android:textColor="@android:color/white"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -263,7 +261,6 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/background_add_photo"
                 android:padding="15dp"
-                android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
                 android:textColor="@android:color/white" />
             <!--            Event Happening-->
             <TextView
@@ -290,23 +287,21 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/nearestmainLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="10dp">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/club">
+                        android:layout_height="match_parent">
 
                         <TextView
                             android:id="@+id/nearestheadline"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="#33000000"
                             android:padding="15dp"
-                            android:text="Event Number 1"
                             android:textColor="@android:color/white"
                             android:textSize="20dp" />
 
@@ -325,8 +320,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/club">
+                        android:layout_height="match_parent">
 
                         <TextView
                             android:id="@+id/nearestheadline2"
@@ -334,7 +328,6 @@
                             android:layout_height="wrap_content"
                             android:background="#33000000"
                             android:padding="15dp"
-                            android:text="Event Number 1"
                             android:textColor="@android:color/white"
                             android:textSize="20dp" />
 

@@ -32,6 +32,7 @@ class BarEventsFragment : Fragment(), View.OnClickListener {
     private var documentList: ArrayList<QueryDocumentSnapshot>?=null
     private var mLayout: GridLayoutManager? = null
     private var adapter:AllEventAdapter?=null
+    private var check:Boolean=true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,22 +57,49 @@ class BarEventsFragment : Fragment(), View.OnClickListener {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        check=false
+        if(adapter!=null){
+            adapter!!.cancelTask()
+        }
+    }
     override fun onResume() {
         super.onResume()
-        db!!.collection("Events").get().addOnSuccessListener { documents->
+        if(check){
+            db!!.collection("Events").get().addOnSuccessListener { documents->
+                documentList!!.clear()
+                all_event_list?.adapter?.notifyDataSetChanged()
+                for(doc in documents){
+                    val barId=doc.get("barId").toString()
+                    if(pref!!.getBarID()==barId){
+                        documentList!!.add(doc)
+                    }
 
-            for(doc in documents){
-                val barId=doc.get("barId").toString()
-                if(pref!!.getBarID()==barId){
-                    documentList!!.add(doc)
+                    adapter= AllEventAdapter(activity!!,documentList)
+                    all_event_list!!.layoutManager=mLayout
+                    all_event_list!!.adapter=adapter
                 }
-                adapter=null
-                all_event_list!!.removeAllViewsInLayout()
-                adapter= AllEventAdapter(activity!!,documentList)
-                all_event_list!!.layoutManager=mLayout
-                all_event_list!!.adapter=adapter
+            }
+        }else{
+            documentList!!.clear()
+            all_event_list?.adapter?.notifyDataSetChanged()
+            adapter=null
+            adapter= AllEventAdapter(activity!!,documentList)
+            all_event_list!!.layoutManager=mLayout
+            all_event_list!!.adapter=adapter
+            db!!.collection("Events").get().addOnSuccessListener { documents->
+
+                for(doc in documents){
+                    val barId=doc.get("barId").toString()
+                    if(pref!!.getBarID()==barId){
+                        documentList!!.add(doc)
+                    }
+
+                }
             }
         }
+
 
     }
     override fun onClick(v: View?) {
@@ -79,9 +107,6 @@ class BarEventsFragment : Fragment(), View.OnClickListener {
             R.id.add_new_event -> {
                 activity!!.startActivity(Intent(activity!!, BarAddNewEventActivity::class.java))
             }
-//            R.id.event1->{
-//                activity!!.startActivity(Intent(activity!!, BarEventInfoActivity::class.java))
-//            }
         }
     }
 

@@ -12,7 +12,7 @@
         android:padding="10dp"
         android:background="@android:color/black">
 
-        <ImageView
+        <ImageView android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_back_arrow" />
@@ -32,7 +32,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -237,6 +238,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/ic_man"
                     android:layout_weight="1.4"/>
+
                 <SeekBar
                     android:id="@+id/crowd_seekbar"
                     style="@android:style/Widget.ProgressBar.Horizontal"
@@ -274,8 +276,9 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/background_add_photo"
+                android:gravity="top"
                 android:padding="15dp"
-                android:hint="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
+                android:textSize="15dp"
                 android:textColor="@android:color/white" />
 
             <Button android:id="@+id/submit_rating"

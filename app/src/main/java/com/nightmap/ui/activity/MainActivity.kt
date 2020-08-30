@@ -1,29 +1,26 @@
 package com.nightmap.ui.activity
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
 import com.nightmap.R
+import com.nightmap.ui.activity.admin.AdminHomeActivity
+import com.nightmap.ui.activity.bar_owner.BarApprovalActivity
 import com.nightmap.ui.activity.bar_owner.BarHomeActivity
+import com.nightmap.ui.activity.user.UserEventInfoActivity
 import com.nightmap.ui.activity.user.UserHomeActivity
-import com.nightmap.ui.activity.user.UserLogin
 import com.nightmap.utility.Preferences
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.math.roundToInt
 
 
@@ -51,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val height = displayMetrics.heightPixels
         val width = displayMetrics.widthPixels
+        val density = displayMetrics.densityDpi
 
         pref = Preferences(this)
 
@@ -67,10 +65,17 @@ class MainActivity : AppCompatActivity() {
                 if (userType == "user") {
                     startActivity(Intent(this@MainActivity, UserHomeActivity::class.java))
                 } else if (userType == "bar") {
-                    startActivity(Intent(this@MainActivity, BarHomeActivity::class.java))
+                    if (pref!!.getBarStatus() == "approved") {
+                        startActivity(Intent(this@MainActivity, BarHomeActivity::class.java))
+                    } else if (pref!!.getBarStatus() == "pending") {
+                        startActivity(Intent(this@MainActivity, BarApprovalActivity::class.java))
+                    }
+
+                } else if (userType == "admin") {
+                    startActivity(Intent(this@MainActivity, AdminHomeActivity::class.java))
                 } else {
                     if (pref!!.getFirstCheck()!!) {
-                        startActivity(Intent(this@MainActivity, UserLogin::class.java))
+                        startActivity(Intent(this@MainActivity, RegisterAsActivity::class.java))
                     } else {
                         startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
                     }
@@ -84,9 +89,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         cdt!!.start()
+        Log.e("Anas","${pref!!.getSharingEventId()}  sharing event id from main activity")
+//        var intent = Intent(this, UserEventInfoActivity::class.java)
+//        intent.putExtra("eventId", pref!!.getSharingEventId())
+//        intent.putExtra("userType", pref!!.getUserType())
+//        Firebase.dynamicLinks.getDynamicLink(Intent())
+//            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+//                var deepLink:Uri?=null
+//                if(pendingDynamicLinkData!=null){
+//                    deepLink=pendingDynamicLinkData.link
+//                    Log.d("Anas","$deepLink from mainActivity")
+//                    startActivity(intent)
+//                }else{
+//                    Log.d("Anas","URI is empty")
+//                }
+//            }
+
     }
-
-
 
     fun isTablet(context: Context): Boolean {
         return context.resources.configuration.screenLayout and

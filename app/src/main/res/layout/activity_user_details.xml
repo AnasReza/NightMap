@@ -7,7 +7,8 @@
     android:orientation="vertical">
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +28,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="ADAM'S PROFILE"
                 android:fontFamily="@font/roboto_bold"
                 android:textColor="@android:color/white"
                 android:textSize="16dp"
@@ -47,17 +47,14 @@
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"/>
         </FrameLayout>
-
         <TextView android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
-            android:text="Adam Evans."
-            android:textColor="@android:color/white"
-            android:textSize="16dp" />
-
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16dp"
+            android:textColor="@android:color/white" />
         <TextView android:id="@+id/friend_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +64,6 @@
             android:textSize="14dp"
             android:drawableLeft="@drawable/ic_friends_grey"
             android:drawablePadding="5dp"
-            android:text="24 Friends"
             android:textColor="#6E6F70" />
         <TextView android:id="@+id/view_location"
             android:layout_width="wrap_content"
@@ -80,17 +76,31 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             />
-        <TextView android:id="@+id/description"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/background_add_photo"
-            android:padding="15dp"
-            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/background_add_photo"
+            android:fillViewport="true"
+            android:padding="15dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

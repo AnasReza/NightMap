@@ -9,9 +9,15 @@ class Preferences(context: Context) {
     private val FIRST_CHECK = "first_check"
     private val USER_ID = "user_id"
     private val BAR_ID = "bar_id"
+    private val BAR_STATUS = "bar_status"
+    private val BAR_PASSWORD = "bar_password"
+    private val ADMIN_ID = "admin_id"
+    private val ADMIN_PASSWORD = "admin_password"
     private val USER_TYPE = "user_type"
     private val USER_NAME = "user_name"
     private val LOGIN = "login"
+    private val DEEP_LINK="deep_link"
+    private val SHARING_EVENT_ID="sharing_event_id"
 
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -33,6 +39,30 @@ class Preferences(context: Context) {
     fun setUserID(value: String) {
         preferences.edit().putString(USER_ID, value).apply()
     }
+    fun getAdminID(): String? {
+        var deviceToken = preferences.getString(ADMIN_ID, "")
+        return deviceToken
+    }
+
+    fun setAdminID(value: String) {
+        preferences.edit().putString(ADMIN_ID, value).apply()
+    }
+    fun getAdminPassword(): String? {
+        var deviceToken = preferences.getString(ADMIN_PASSWORD, "")
+        return deviceToken
+    }
+
+    fun setAdminPassword(value: String) {
+        preferences.edit().putString(ADMIN_PASSWORD, value).apply()
+    }
+    fun getBarPassword(): String? {
+        var deviceToken = preferences.getString(BAR_PASSWORD, "")
+        return deviceToken
+    }
+
+    fun setBarPassword(value: String) {
+        preferences.edit().putString(BAR_PASSWORD, value).apply()
+    }
 
     fun getBarID(): String? {
         var deviceToken = preferences.getString(BAR_ID, "")
@@ -41,6 +71,14 @@ class Preferences(context: Context) {
 
     fun setBarID(value: String) {
         preferences.edit().putString(BAR_ID, value).apply()
+    }
+    fun getBarStatus(): String? {
+        var deviceToken = preferences.getString(BAR_STATUS, "pending")
+        return deviceToken
+    }
+
+    fun setBarStatus(value: String) {
+        preferences.edit().putString(BAR_STATUS, value).apply()
     }
 
     fun getUserType(): String? {
@@ -68,6 +106,22 @@ class Preferences(context: Context) {
 
     fun setLogin(value: Boolean) {
         preferences.edit().putBoolean(LOGIN, value).apply()
+    }
+    fun getDeepLink(): String? {
+        var deviceToken = preferences.getString(DEEP_LINK, "")
+        return deviceToken
+    }
+
+    fun setDeepLink(value: String) {
+        preferences.edit().putString(DEEP_LINK, value).apply()
+    }
+    fun getSharingEventId(): String? {
+        var deviceToken = preferences.getString(SHARING_EVENT_ID, "")
+        return deviceToken
+    }
+
+    fun setSharingEventId(value: String) {
+        preferences.edit().putString(SHARING_EVENT_ID, value).apply()
     }
 
 }

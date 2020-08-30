@@ -9,26 +9,19 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
-import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.nightmap.R
 import com.nightmap.ui.activity.bar_owner.BarEventInfoActivity
-import com.nightmap.ui.activity.user.UserBarDetailsActivity
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
-import java.text.DecimalFormat
-import kotlin.math.roundToInt
 
 class AllEventAdapter(
     val context: Activity,
@@ -36,10 +29,11 @@ class AllEventAdapter(
 ) :
     RecyclerView.Adapter<AllEventAdapter.AllEventHolder>() {
     private var notifyHolder: AllEventHolder? = null
+    private var downloadTask: BackgroundDownloadTask? = null
 
     class AllEventHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        var layout: RelativeLayout = view.findViewById(R.id.layout)
+        var layout: RelativeLayout = view.findViewById(R.id.mainLayout)
         var headline: TextView = view.findViewById(R.id.headline)
 
     }
@@ -50,7 +44,13 @@ class AllEventAdapter(
         notifyHolder = AllEventHolder(itemView)
         return notifyHolder as AllEventHolder
     }
-
+fun cancelTask(){
+    if(downloadTask!=null){
+        if(downloadTask!!.status==AsyncTask.Status.RUNNING){
+            downloadTask!!.cancel(true)
+        }
+    }
+}
     override fun getItemCount(): Int {
         return list!!.size
     }
@@ -74,21 +74,60 @@ class AllEventAdapter(
 
         val document = list!![position]
         holder.headline.text = document.get("title").toString()
-        var imageUrl: ArrayList<String> = document.get("imageUrl") as ArrayList<String>
-        SomeTask(imageUrl[0], holder.layout).execute()
-
-
+        var imageUrl: ArrayList<String> = document.get("imagesUrl") as ArrayList<String>
+        checkImage(imageUrl, holder.layout, document.id,"EventImages")
         holder.layout.setOnClickListener {
             context.startActivity(
                 Intent(
                     context,
                     BarEventInfoActivity::class.java
-                ).putExtra("id", document.get("eventId").toString())
+                ).putExtra("eventId", document.get("eventId").toString())
             )
         }
 
     }
 
+    private fun checkImage(
+        list: ArrayList<String>,
+        layout: RelativeLayout,
+        id: String,
+        imageFolder: String
+    ) {
+        val myDir = File(context!!.filesDir, "$imageFolder/$id")
+        if (myDir.exists()) {
+            var imageFile = File(myDir, "image0.png")
+            if (imageFile.exists()) {
+                var b: Bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile))
+                var dr: Drawable = BitmapDrawable(context!!.resources, b)
+                layout!!.background = dr
+                for (x in 0 until list.size) {
+                    downloadTask = BackgroundDownloadTask(list[x], x, layout!!, myDir)
+                    downloadTask!!.execute()
+                }
+            } else {
+                downloadTask = BackgroundDownloadTask(
+                    list[0],
+                    0,
+                    layout,
+                    myDir
+                )
+                downloadTask!!.execute()
+            }
+
+        } else {
+            myDir.mkdirs()
+            Log.d("Anas", "${myDir.exists()} boolean of folder")
+            for (x in 0 until list.size) {
+                downloadTask = BackgroundDownloadTask(
+                    list[x],
+                    x,
+                    layout,
+                    myDir
+                )
+                downloadTask!!.execute()
+            }
+        }
+    }
 
     fun isTablet(context: Context): Boolean {
         return context.resources.configuration.screenLayout and
@@ -112,4 +151,47 @@ class AllEventAdapter(
         }
     }
 
+    inner class BackgroundDownloadTask(
+        val url: String,
+        val position: Int,
+        val layout: RelativeLayout,
+        val mainFile: File
+    ) :
+        AsyncTask<String, URL, Bitmap>() {
+
+        override fun doInBackground(vararg params: String?): Bitmap {
+
+            var length = 0
+            val bitmap = getBitmapFromURL(url)
+            val scaledBitmap = bitmap?.let { Bitmap.createScaledBitmap(it, 739, 415, false) }
+            val bos = ByteArrayOutputStream()
+            bitmap!!.compress(Bitmap.CompressFormat.PNG, 0, bos)
+            val bitmapdata = bos.toByteArray()
+            val bs = ByteArrayInputStream(bitmapdata)
+
+            val fos =
+                FileOutputStream("${mainFile.absolutePath}${File.separator}image$position.png")
+
+            while ({ length = bs.read(bitmapdata); length }() > 0) {
+                fos.write(bitmapdata, 0, length)
+            }
+            fos.flush()
+            fos.close()
+            bs.close()
+            return scaledBitmap!!
+        }
+
+        override fun onPostExecute(result: Bitmap?) {
+            super.onPostExecute(result)
+            Log.e("Anas", "Downloading and saving file is complete")
+            if (context != null) {
+                var dr: Drawable = BitmapDrawable(context!!.resources, result)
+
+                if (position == 0) {
+                    layout!!.background = dr
+                }
+            }
+
+        }
+    }
 }

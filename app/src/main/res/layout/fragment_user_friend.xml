@@ -5,30 +5,26 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:orientation="vertical">
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:backgroundTint="@android:color/white"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    app:cardCornerRadius="5dp">
 
-    <EditText
+
+    <EditText android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:backgroundTint="@null"
-        android:drawableLeft="@drawable/ic_search_new"
+        android:drawableLeft="@drawable/ic_search"
         android:drawablePadding="10dp"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
         android:fontFamily="@font/roboto_regular"
-        android:padding="5dp"
+        android:padding="10dp"
+        android:background="@drawable/background_edit_text"
         android:paddingBottom="50dp"
-        android:text="Search Users"
-        android:textColor="@color/edit_text_color"
+        android:hint="Search Friends"
+        android:textColor="@android:color/white"
         android:textColorHint="@color/edit_text_color"></EditText>
-</androidx.cardview.widget.CardView>
+
 
 
     <com.google.android.material.tabs.TabLayout
@@ -39,6 +35,16 @@
         app:tabMode="fixed"
         app:tabIndicatorColor="@android:color/white"
         app:tabTextColor="@android:color/white" />
+    <TextView android:id="@+id/messageText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:textSize="20dp"
+        android:text="No Result Found. "
+        android:visibility="gone"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_main"
@@ -46,5 +52,24 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.FadingCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:translationZ="90dp"
+            app:SpinKit_Color="@android:color/white"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
 </LinearLayout>

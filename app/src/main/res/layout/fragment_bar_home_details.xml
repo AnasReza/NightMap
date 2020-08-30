@@ -20,7 +20,20 @@
                 android:id="@+id/imageLayout"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
-
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                     />
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    android:layout_centerInParent="true"
+                    style="@style/SpinKitView.FadingCircle"
+                    android:layout_width="wrap_content"
+                    android:padding="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@android:color/white" />
                 <LinearLayout
                     android:id="@+id/layout"
                     android:layout_width="match_parent"
@@ -56,7 +69,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="4.5"
                                     android:textColor="@android:color/white"
                                     android:textSize="14dp"
                                     android:textStyle="bold"></TextView>
@@ -92,7 +104,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="4.5"
                                     android:textColor="@android:color/white"
                                     android:textSize="14dp"
                                     android:textStyle="bold"></TextView>
@@ -235,7 +246,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Pearl Street"
                     android:textColor="@android:color/white"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -249,23 +259,36 @@
                     android:layout_marginRight="20dp"
                     android:drawableLeft="@drawable/ic_star"
                     android:drawablePadding="5dp"
-                    android:text="34 RATED TONIGHT"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/description"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/background_add_photo"
+                android:fillViewport="true"
                 android:padding="15dp"
-                android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
-                android:textColor="@android:color/white" />
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
             <!--            Event Happening-->
-            <TextView
+            <TextView android:id="@+id/eventText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -279,14 +302,14 @@
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:scrollbars="none">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="170dp">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:id="@+id/eventHolder"
@@ -299,17 +322,6 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/message"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="sans-serif"
-                        android:text="Currently There Is No Event Happening"
-                        android:textColor="@android:color/white"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:visibility="gone" />
                 </RelativeLayout>
 
             </HorizontalScrollView>

@@ -5,7 +5,9 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="background_start">#101010</color>
+    <color name="white">#FFFFFF</color>
     <color name="edit_text_color">#909090</color>
+    <color name="background_color">#333333</color>
     <color name="edit_text_background">#393939</color>
     <color name="line_color">#ADADAD</color>
     <color name="star_yellow">#F3CD00</color>

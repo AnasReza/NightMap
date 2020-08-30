@@ -40,22 +40,48 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif"
-                android:text="Alexis James"
                 android:textColor="@android:color/white"
                 android:textSize="20dp" />
-
-            <EditText android:id="@+id/about_text"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="15dp"
-                android:imeOptions="actionDone"
-                android:inputType="text|textMultiLine"
-                android:gravity="top"
-                android:hint="Write About Yourself"
                 android:background="@drawable/background_add_photo"
-                android:padding="15dp"
-                android:textColor="@android:color/white" />
+                android:fillViewport="true"
 
+                android:scrollbars="none">
+
+
+
+                    <EditText android:id="@+id/about_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:imeOptions="actionDone"
+                        android:inputType="text|textMultiLine"
+                        android:gravity="top"
+                        android:background="@null"
+                        android:hint="Write About Yourself"
+                        android:padding="15dp"
+                        android:textColor="@android:color/white" />
+
+
+            </androidx.core.widget.NestedScrollView>
+
+
+            <TextView
+                android:id="@+id/edit_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:fontFamily="@font/roboto_regular"
+                android:drawableLeft="@drawable/ic_edit_profile"
+                android:drawableRight="@drawable/ic_path"
+                android:drawablePadding="20dp"
+                android:text="Edit Profile"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
             <TextView
                 android:id="@+id/change_number"
                 android:layout_width="match_parent"
@@ -90,6 +116,7 @@
                     android:textSize="16dp" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/show_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -126,7 +153,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16dp" />
 
-            <TextView
+            <TextView android:id="@+id/shareApp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -148,9 +175,9 @@
                 android:layout_marginRight="30dp"
                 android:drawableLeft="@drawable/ic_logout"
                 android:drawablePadding="20dp"
-                android:text="Log out"
+                android:text="Delete Account"
                 android:fontFamily="@font/roboto_regular"
-                android:textColor="@android:color/white"
+                android:textColor="#FF0000"
                 android:textSize="16dp" />
         </LinearLayout>
 

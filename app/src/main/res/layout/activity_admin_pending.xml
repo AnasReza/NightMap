@@ -10,19 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomLayout"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <RelativeLayout android:id="@+id/imageLayout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/club">
-
-                <ImageView
+                android:layout_height="200dp">
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.FadingCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:translationZ="90dp"
+                    app:SpinKit_Color="@android:color/white"
+                    android:visibility="visible"/>
+                <ImageView android:id="@+id/back_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -32,19 +46,18 @@
             </RelativeLayout>
 
 
-            <TextView
+            <TextView android:id="@+id/bar_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Pearl Street"
                 android:textColor="@android:color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
 
-            <TextView
+            <TextView android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
@@ -53,7 +66,6 @@
                 android:background="@drawable/background_item"
                 android:fontFamily="@font/roboto_regular"
                 android:padding="15dp"
-                android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -67,7 +79,8 @@
                 android:textColor="@android:color/white"
                 android:textSize="10dp" />
 
-            <EditText
+            <TextView
+                android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -75,7 +88,6 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/background_item2"
                 android:fontFamily="@font/roboto_regular"
-                android:hint="Boston Street, 211 Ave. 112"
                 android:padding="15dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
@@ -112,15 +124,12 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_item2">
 
-                        <EditText
+                        <TextView android:id="@+id/discount"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null"
                             android:fontFamily="@font/roboto_bold"
-                            android:hint="20%"
                             android:padding="15dp"
-                            android:textColor="@android:color/white"
-                            android:textColorHint="@android:color/white"></EditText>
+                            android:textColor="@android:color/white"></TextView>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -145,15 +154,13 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_item2">
 
-                        <EditText
+                        <TextView android:id="@+id/free_drink"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null"
                             android:fontFamily="@font/roboto_bold"
-                            android:hint="12"
                             android:padding="15dp"
                             android:textColor="@android:color/white"
-                            android:textColorHint="@android:color/white"></EditText>
+                            ></TextView>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -177,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
 
-            <LinearLayout
+            <LinearLayout android:id="@+id/accept_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -220,7 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.1">
 
-            <LinearLayout
+            <LinearLayout android:id="@+id/reject_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

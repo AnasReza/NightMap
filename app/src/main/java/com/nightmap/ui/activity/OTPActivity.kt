@@ -1,21 +1,16 @@
 package com.nightmap.ui.activity
 
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -24,17 +19,12 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.nightmap.R
-import com.nightmap.ui.activity.bar_owner.BarApprovalActivity
-import com.nightmap.ui.activity.bar_owner.BarHomeActivity
 import com.nightmap.ui.activity.user.UserHomeActivity
 import com.nightmap.utility.Preferences
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class OTPActivity : AppCompatActivity(), View.OnClickListener {
@@ -68,7 +58,8 @@ class OTPActivity : AppCompatActivity(), View.OnClickListener {
             Log.i("Anas", "VERIFICATION IS COMPLETE")
             smsCode = credentials.smsCode!!
             newCredentials = credentials
-            //signInWithPhoneAuthCredentials(credentials)
+            Log.d("Anas","$smsCode   sms code")
+           // signInWithPhoneAuthCredentials(credentials)
 
         }
 
@@ -84,6 +75,7 @@ class OTPActivity : AppCompatActivity(), View.OnClickListener {
             super.onCodeSent(verficationCode, token)
             Log.i("Anas", "$verficationCode  this verification code")
             verification = verficationCode
+
         }
 
         override fun onCodeAutoRetrievalTimeOut(p0: String) {
@@ -91,7 +83,6 @@ class OTPActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
-
     private fun signInWithPhoneAuthCredentials(credentials: PhoneAuthCredential) {
         val auth = FirebaseAuth.getInstance()
         auth.signInWithCredential(credentials).addOnCompleteListener(this) { task ->
@@ -99,13 +90,7 @@ class OTPActivity : AppCompatActivity(), View.OnClickListener {
             if (task.isSuccessful) {
                 val user = task.result?.user
 
-                if (str == "User") {
-
-                    registerUserInFirebase()
-                } else if (str == "BarOwner") {
-
-                    registerBarInFirebase()
-                }
+                registerUserInFirebase(user!!.uid)
 
             }
         }
@@ -150,7 +135,7 @@ class OTPActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun registerUserInFirebase() {
+    private fun registerUserInFirebase(uid:String) {
         val user: String = intent.getStringExtra("name")
         val phone: String = intent.getStringExtra("phone")
         val latlng: LatLng = intent.getParcelableExtra("latlng")
@@ -166,120 +151,50 @@ class OTPActivity : AppCompatActivity(), View.OnClickListener {
                 "fullName" to user,
                 "phoneNumber" to phone,
                 "profileImage" to "",
-                "token" to verification
+                "uid" to uid,
+                "showLocation" to false
             )
-        db!!.collection("User").add(userHash).addOnSuccessListener { documentReference ->
-            Log.d("Anas", "DocumentSnapshot added with ID: ${documentReference.id}")
-            id = documentReference.id
-            val newHash = hashMapOf("uid" to documentReference.id, "userType" to "User")
-            db!!.collection("Users").document(documentReference.id).set(newHash)
+        db!!.collection("User").document(uid).set(userHash)
+            .addOnSuccessListener { documentReference ->
+
+            val newHash = hashMapOf("uid" to uid, "userType" to "User")
+            db!!.collection("Users").document(uid).set(newHash)
                 .addOnSuccessListener { _ ->
-                    val newHapMap = hashMapOf("uid" to id)
-                    db!!.collection("User").document(id).update(newHapMap as Map<String, Any>)
-                        .addOnSuccessListener { _ ->
-                            pref!!.setFirstCheck(true)
-                            pref!!.setUserID(id)
-                            pref!!.setLogin(true)
-                            pref!!.setUserType("user")
-                            pref!!.setUserName(user)
-                            cdt!!.cancel()
-                            startActivity(
-                                Intent(
-                                    this,
-                                    UserHomeActivity::class.java
+                    FirebaseInstanceId.getInstance().instanceId
+                        .addOnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            task.exception!!.printStackTrace()
+                            return@addOnCompleteListener
+                        }
+
+                        val token = task.result?.token
+                        val tokenMap = hashMapOf("token" to token)
+                        db!!.collection("User").document(uid)
+                            .update(tokenMap as Map<String, Any>).addOnSuccessListener {
+                                pref!!.setFirstCheck(true)
+                                pref!!.setUserID(uid)
+                                pref!!.setLogin(true)
+                                pref!!.setUserType("user")
+                                pref!!.setUserName(user)
+                                cdt!!.cancel()
+                                startActivity(
+                                    Intent(
+                                        this,
+                                        UserHomeActivity::class.java
+                                    )
                                 )
-                            )
-                            finish()
-                        }
-
-                }
-
-        }
-            .addOnFailureListener { e ->
-                Log.w("Anas", "Error adding document", e)
-            }
-    }
-
-    private fun registerBarInFirebase() {
-        val nameString = intent.getStringExtra("name")
-        val phoneString = intent.getStringExtra("phone")
-        val barString = intent.getStringExtra("barName")
-        val locationString = intent.getStringExtra("location")
-        val descriptionString = intent.getStringExtra("description")
-        val discountString = intent.getIntExtra("discount", 0)
-        val freeDrinkString = intent.getIntExtra("freeDrink", 0)
-        val imageURI = intent.getParcelableExtra<Uri>("image")
-        val geoPoint: GeoPoint = GeoPoint(0.0, 0.0)
-
-        var id: String = ""
-
-        val userHash = hashMapOf(
-            "addedBy" to "",
-            "addedOn" to FieldValue.serverTimestamp(),
-            "averageAtmosphere" to 0.0,
-            "averageCrowded" to 0.0,
-            "averageGenderRatio" to 0.0,
-            "averageMusic" to 0.0,
-            "fullName" to nameString,
-            "phoneNumber" to phoneString,
-            "status" to "approved",
-            "title" to barString,
-            "barLocation" to locationString,
-            "description" to descriptionString,
-            "discount" to discountString,
-            "freeDrinkAfter" to freeDrinkString,
-            "location" to geoPoint,
-            "todayReview" to 0.0,
-            "token" to verification,
-            "totalReview" to 0.0
-        )
-        db!!.collection("Bars").add(userHash).addOnSuccessListener { documentReference ->
-            Log.d("Anas", "DocumentSnapshot added with ID: ${documentReference.id}")
-            id = documentReference.id
-            val newHash = hashMapOf("uid" to documentReference.id, "userType" to "BarOwner")
-            db!!.collection("Users").document(documentReference.id).set(newHash)
-                .addOnSuccessListener { documentReference ->
-
-                    var mStorageRef: StorageReference = FirebaseStorage.getInstance().reference
-                    var stoRef: StorageReference
-                    if (imageURI != null) {
-                        stoRef = mStorageRef.child("BarImages/$id/$barString.png")
-                        val uploadTask = stoRef.putFile(imageURI)
-                        uploadTask.addOnSuccessListener { taskSnapshot ->
-                            taskSnapshot!!.storage.downloadUrl.addOnCompleteListener(
-                                OnCompleteListener { task ->
-                                    val file: ArrayList<String> = arrayListOf<String>()
-                                    file.add(task.result.toString())
-
-                                    val newHashMap = hashMapOf("imagesURL" to file, "barId" to id)
-                                    db!!.collection("Bars").document(id)
-                                        .update(newHashMap as Map<String, Any>)
-                                        .addOnSuccessListener {
-                                            pref!!.setFirstCheck(true)
-                                            pref!!.setBarID(id)
-                                            pref!!.setLogin(true)
-                                            pref!!.setUserType("bar")
-                                            cdt!!.cancel()
-                                            startActivity(
-                                                Intent(
-                                                    this,
-                                                    BarHomeActivity::class.java
-                                                )
-                                            )
-                                            finish()
-
-                                        }
-                                })
-                        }
+                                finish()
+                            }
                     }
+
                 }
+
         }
             .addOnFailureListener { e ->
                 Log.w("Anas", "Error adding document", e)
             }
-
-
     }
+
 
     override fun onClick(v: View?) {
         when (v!!.id) {
@@ -293,8 +208,11 @@ class OTPActivity : AppCompatActivity(), View.OnClickListener {
                     val string6 = edit6!!.text.toString()
                     if (string1 != "" && string2 != "" && string3 != "" && string4 != "" && string5 != "" && string6 != "") {
                         val smsCodeString = "$string1$string2$string3$string4$string5$string6"
+                      //  val credentials=PhoneAuthProvider.getCredential(verification,testVerificationCode)
                         if (smsCodeString == smsCode) {
                             signInWithPhoneAuthCredentials(newCredentials!!)
+                        }else{
+                            Log.e("Anas","OTP not equal")
                         }
                         Log.e("Anas", "$smsCode code sent by firebase")
                     }

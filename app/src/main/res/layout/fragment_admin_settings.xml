@@ -19,7 +19,7 @@
         android:textColor="@android:color/white"
         android:textSize="18dp" />
 
-    <TextView android:id="@+id/change_number"
+    <TextView android:id="@+id/change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -62,7 +62,7 @@
         android:textSize="18dp" />
 
 
-    <TextView
+    <TextView android:id="@+id/log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -71,8 +71,8 @@
         android:fontFamily="@font/roboto_regular"
         android:drawableLeft="@drawable/ic_logout"
         android:drawablePadding="20dp"
-        android:text="Log out"
-        android:textColor="@android:color/white"
+        android:text="Log Out"
+        android:textColor="#FF0000"
         android:textSize="18dp" />
 
 </LinearLayout>

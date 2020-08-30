@@ -15,6 +15,7 @@ import com.nightmap.R
 
 class AdminEventInfoActivity: AppCompatActivity() {
     private var bottomLayout: LinearLayout?=null
+    private var back_button:ImageView?=null
 
     private var newView:View?=null
     private var inflator: LayoutInflater?=null
@@ -29,11 +30,13 @@ class AdminEventInfoActivity: AppCompatActivity() {
     private fun init() {
 
         bottomLayout=findViewById(R.id.bottomLayout)
+        back_button=findViewById(R.id.back_button)
 
         inflator= LayoutInflater.from(this)
         for(x in 0..3){
             addBottomLayout()
         }
+        back_button!!.setOnClickListener { onBackPressed() }
     }
     private fun addBottomLayout() {
         newView=inflator!!.inflate(R.layout.item_user_details_rate,null)

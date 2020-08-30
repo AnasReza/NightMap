@@ -64,7 +64,7 @@
                 android:backgroundTint="@android:color/white"
                 app:cardCornerRadius="20dp">
 
-                <EditText
+                <EditText android:id="@+id/current_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -97,12 +97,13 @@
                 android:backgroundTint="@android:color/white"
                 app:cardCornerRadius="20dp">
 
-                <EditText
+                <EditText android:id="@+id/new_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/black"
                     android:background="@null"
                     android:layout_marginLeft="10dp"
+                    android:inputType="textEmailAddress"
                     android:fontFamily="@font/roboto_regular"></EditText>
             </androidx.cardview.widget.CardView>
 

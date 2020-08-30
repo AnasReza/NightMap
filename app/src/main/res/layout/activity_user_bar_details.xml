@@ -16,20 +16,85 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout android:id="@+id/imageLayout"
+            <RelativeLayout
+                android:id="@+id/imageLayout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/club">
+                android:layout_height="200dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.FadingCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:translationZ="90dp"
+                    android:visibility="visible"
+                    app:SpinKit_Color="@android:color/white" />
 
                 <ImageView
                     android:id="@+id/back_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/ic_back_arrow" />
 
-                <ImageView android:id="@+id/imageBlur"
+                <ImageView
+                    android:id="@+id/info"
+                    android:layout_width="21.14dp"
+                    android:layout_height="21.14dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_info"
+                    android:visibility="gone" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_info"
+                    android:backgroundTint="@android:color/white"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="30dp"
+                        android:paddingBottom="8dp">
+
+                        <ImageButton
+                            android:id="@+id/blockImage"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/ic_blocked" />
+
+                        <TextView
+                            android:id="@+id/blockText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Block"
+                            android:textColor="@android:color/black"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/imageBlur"
                     android:layout_width="match_parent"
                     android:layout_height="67dp"
                     android:layout_alignParentBottom="true" />
@@ -70,7 +135,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="4.5"
                                     android:textColor="@android:color/white"
                                     android:textSize="14dp"
                                     android:textStyle="bold"></TextView>
@@ -106,7 +170,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="4.5"
                                     android:textColor="@android:color/white"
                                     android:textSize="14dp"
                                     android:textStyle="bold"></TextView>
@@ -183,8 +246,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="bottom"
+                        android:orientation="horizontal"
                         android:weightSum="4">
 
                         <TextView
@@ -243,17 +306,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView android:id="@+id/barTitle"
+                <TextView
+                    android:id="@+id/barTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Pearl Street"
                     android:textColor="@android:color/white"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/viewLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -265,18 +329,34 @@
                     android:textColor="@android:color/white" />
             </RelativeLayout>
 
-            <TextView android:id="@+id/description"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/background_add_photo"
+                android:fillViewport="true"
                 android:padding="15dp"
-                android:text="Nulla leo elit, pharetra bibendum justo quis, cursus consectetur erat. Sed nec posuere turpis. Maecenas nec bibendum purus. Nulla fringilla, lorem iaculis iaculis fermentum, ligula nibh mollis ipsum, et scelerisque risus ante eu sem. Phasellus ac sagittis nisi. Suspendisse potenti. Nunc volutpat dui ipsum. "
-                android:textColor="@android:color/white" />
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
             <!--            Event Happening-->
             <TextView
+                android:id="@+id/eventText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -286,35 +366,26 @@
                 android:text="Events Happening"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="170dp">
-                    <LinearLayout android:id="@+id/eventHolder"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/eventHolder"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
                         android:orientation="horizontal"
-                        android:weightSum="2"
-                        android:visibility="gone">
-
-
-                    </LinearLayout>
-                    <TextView android:id="@+id/message"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Currently There Is No Event Happening"
-                        android:textColor="@android:color/white"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="sans-serif"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:visibility="visible"/>
+                        android:visibility="gone"
+                        android:weightSum="2"></LinearLayout>
                 </RelativeLayout>
 
             </HorizontalScrollView>

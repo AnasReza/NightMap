@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView android:id="@+id/messageText"
@@ -17,8 +18,18 @@
         android:id="@+id/myfriends_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/sync_contact_text"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@+id/sync_contact_text"
+        android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
 
-
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.FadingCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:translationZ="90dp"
+        app:SpinKit_Color="@android:color/white"
+        android:visibility="visible"/>
 
 </RelativeLayout>

@@ -73,7 +73,6 @@
                     android:background="@null"
                     android:layout_marginLeft="15dp"
                     android:textColor="@android:color/black"
-                    android:hint="4573962785"
                     android:textSize="25dp"
                     android:textColorHint="@android:color/black"/>
             </LinearLayout>
